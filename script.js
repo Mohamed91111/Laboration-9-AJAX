@@ -5,6 +5,7 @@ let title = ""
 let author = ""
 let updated = ""
 let id =""
+let error =""
 window.addEventListener('load', () => {
 	console.log('2 Window load event');
 
@@ -37,7 +38,11 @@ window.addEventListener('load', () => {
     })
     let view = document.querySelector('#view');
     view.addEventListener('click', event => {
-        view.disabled = 'disabled';
+        if(key == ""){ 
+            window.alert("GET A KEY FIRST")
+        };
+        //view.disabled = 'disabled';
+        
         viewBooks(view,0); 
                              
     })
@@ -65,16 +70,17 @@ async function addBook(button,counter){
         //let error=document.getElementById(error).innerHTML=`
           //      <span>${info.message}+<br></span>`;
         
-
+        document.getElementsByClassName("message").innerHTML = "hi"
         console.log('failed trying again' + counter); 
         console.log(info);
+        window.alert(info.message);
         addBook(counter);
     }else if(info.status !== 'success' && counter < 5){ 
         let error=document.getElementById(error).innerHTML=`
         <span>${info.message}+<br></span>`;
         
-        
-            window.alert("failed to add books 5/5 tries. Try again!")
+        window.alert(info.message);
+           // window.alert("failed to add books 5/5 tries. Try again!")
     }else{ 
         
         console.log('Book Added on try ' + counter +'/5 tries' )
@@ -94,14 +100,16 @@ async function viewBooks(button,counter){
     let info = await req.json();
     if(info.status !== 'success' && counter < 5){ 
         console.log('failed, trying again' + counter)
-        let error =document.getElementById(error).innerHTML=`
-                <span>${info.message}+<br></span>`;
+       // document.querySelector("message").innerHTML = "Try again!";
+        //let error =document.getElementById(error).innerHTML=`
+                //<span>${info.message}+<br></span>`;
         
         console.log(info);
         //viewBooks(button,counter)
     }else if(info.status !== 'success' && counter == 5){
         console.log(info);
-            window.alert("failed to get book query, 5/5 tries. Try again!")
+            window.alert("failed to get book query, 5/5 tries. Try again!");
+            document.querySelector("message").innerHTML = "Try again!";
             let error =document.getElementById(error).innerHTML=`
                 <span>${info.message}+<br></span>`
             
