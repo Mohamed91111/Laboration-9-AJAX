@@ -13,7 +13,9 @@ window.addEventListener('load', () => {
 	let key1 = document.querySelector('#KeyButton');
 	key1.addEventListener('click', async e => {
 		console.log('3 Clicked on key button');
-		
+        
+        //editebutton.disabled="disable";
+        //deletebutton.disabled="disable";
 
 		const response = await fetch(apiUrl + 'requestKey');
 		console.log('4 Got response from server', response);
@@ -32,30 +34,31 @@ window.addEventListener('load', () => {
             console.log('Clicked on addbutton');
          if(key == ""){ 
             nokey();
-            function nokey(){
-                document.getElementById("message").innerHTML = "First get a key" ;}
-        }
+          function nokey(){
+        document.getElementById("message").innerHTML = "First get a key";}
+        }else{
         addBook(addbutton,0);
-        console.log('book added');
+        console.log('book added');}
     })
     let view = document.querySelector('#view');
     view.addEventListener('click', event => {
         if(key == ""){ 
             nokey();
           function nokey(){
-        document.getElementById("message").innerHTML = "First get a key" ;}
-        };
+        document.getElementById("message").innerHTML = "First get a key";}
+        }
         //view.disabled = 'disabled';
-        
-        viewBooks(view,0); 
+        else{
+        viewBooks(view,0); }
                              
     })
     let mysearch = document.querySelector('#searchbutton'); 
     mysearch.addEventListener('click', async e => {
             e.preventDefault();
+            searchbutton.disabled="disable";
             console.log('Clicked on searchbutton');
          if(key == ""){ 
-            window.alert("GET A KEY FIRST")
+            window.alert("this feature is not working yet")
         }
         searchBook(searchbutton,0);
         
@@ -75,7 +78,7 @@ async function addBook(button,counter){
           //      <span>${info.message}+<br></span>`;
           fail();
           function fail(){
-        document.getElementById("message").innerHTML = "Failed to add after "+counter+" try!" ;}
+        document.getElementById("message").innerHTML = "Failed to add your book. Click (Add New Book) button again -"+counter+" try!"}
         console.log('failed trying again' + counter); 
         console.log(info.message);
         console.log(info.status);
@@ -85,7 +88,7 @@ async function addBook(button,counter){
         //<span>${info.message}+<br></span>`;
         fail();
           function fail(){
-        document.getElementById("message").innerHTML = "Failed to add after "+counter+" try!" ;}
+        document.getElementById("message").innerHTML = "Failed to add your book. Click (Add New Book) button again -"+counter+" try!"}
            // window.alert("failed to add books 5/5 tries. Try again!")
     }else{ 
         
@@ -110,7 +113,7 @@ async function viewBooks(button,counter){
         console.log('failed, trying again' + counter)
         fail();
           function fail(){
-        document.getElementById("message").innerHTML = "Can't show the book after "+counter+" try!" ;}
+        document.getElementById("message").innerHTML = "Can't show the book. Click (View) button again - "+counter+" try!" ;}
        // document.querySelector("message").innerHTML = "Try again!";
         //let error =document.getElementById(error).innerHTML=`
                 //<span>${info.message}+<br></span>`;
