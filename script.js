@@ -118,10 +118,10 @@ async function viewBooks(button,counter){
         //let error =document.getElementById(error).innerHTML=`
                 //<span>${info.message}+<br></span>`;
         
-        console.log(info);
+        console.log(info.message);
         //viewBooks(button,counter)
     }else if((info.status !== 'success') && (counter == 5)){
-        console.log(info);
+        console.log(info.message);
         console.log("failed to get book query, 5/5 tries. Try again!");
             document.querySelector("message").innerHTML = "Try again!";
             let error =document.getElementById(error).innerHTML=`
@@ -144,7 +144,7 @@ async function viewBooks(button,counter){
             success()
             function success(){
             document.getElementById("message").innerHTML = "This is your last added book: "+ info.data[i].title;} 
-            console.log(info);
+            console.log(info.message);
            // searchBook(searchbutton,0)
 
         }
