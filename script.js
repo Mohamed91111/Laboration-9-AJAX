@@ -136,7 +136,7 @@ async function viewBooks(button,counter){
             document.querySelector('.bookList').appendChild(book)
             success()
             function success(){
-                document.getElementById("message").innerHTML = "This is your last added book: "+ info.data[i].title;} 
+            document.getElementById("message").innerHTML = "This is your last added book: "+ info.data[i].title;} 
             console.log(info);
            // searchBook(searchbutton,0)
 
