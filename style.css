@@ -31,7 +31,7 @@
 }
 }
 
-input, span, .bookQuerry{
+input, span, .bookQuerry, #message{
     background-color: #fff;
     border: 1px solid #c1c1c1;
     color: #444444;
@@ -49,13 +49,13 @@ input, span, .bookQuerry{
     text-align: center;
     margin: auto;
 }
-/*.message{
+#message{
     
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
     margin: 50px auto;
 }
-{
+/*{
     background-color: #fff;
     border: 1px solid #c1c1c1;
     color: #c1c1c1;

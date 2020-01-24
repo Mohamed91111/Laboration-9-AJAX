@@ -66,25 +66,29 @@ async function addBook(button,counter){
     let req = await window.fetch(apiUrl + 'op=insert' +'&key='+ key + '&title=' + title + '&author=' + author);
     let info = await req.json();
     console.log(info.status);
-    if(info.status !== 'success' && counter < 5){  
+    if((info.status !== 'success') && (counter < 5)){  
         //let error=document.getElementById(error).innerHTML=`
           //      <span>${info.message}+<br></span>`;
-        
-        document.getElementsByClassName("message").innerHTML = "hi"
+          fail();
+          function fail(){
+        document.getElementById("message").innerHTML = "Failed to add after "+counter+" try!" ;}
         console.log('failed trying again' + counter); 
-        console.log(info);
-        window.alert(info.message);
-        addBook(counter);
-    }else if(info.status !== 'success' && counter < 5){ 
-        let error=document.getElementById(error).innerHTML=`
-        <span>${info.message}+<br></span>`;
+        console.log(info.message);
+        console.log(info.status);
         
-        window.alert(info.message);
+    }else if((info.status == 'error') && (counter >= 5)){ 
+        //let error=document.getElementById(error).innerHTML=`
+        //<span>${info.message}+<br></span>`;
+        fail();
+          function fail(){
+        document.getElementById("message").innerHTML = "Failed to add after "+counter+" try!" ;}
            // window.alert("failed to add books 5/5 tries. Try again!")
     }else{ 
         
         console.log('Book Added on try ' + counter +'/5 tries' )
-        
+        success();
+          function success(){
+        document.getElementById("message").innerHTML = "The book added after "+counter+" try!" ;}
         document.querySelector('#title').value = '';
         document.querySelector('#author').value = '';
         
@@ -98,17 +102,20 @@ async function viewBooks(button,counter){
     counter++
     let req = await window.fetch(apiUrl + 'op=select' +'&key='+ key)
     let info = await req.json();
-    if(info.status !== 'success' && counter < 5){ 
+    if((info.status !== 'success') && (counter < 5)){ 
         console.log('failed, trying again' + counter)
+        fail();
+          function fail(){
+        document.getElementById("message").innerHTML = "Can't show the book after "+counter+" try!" ;}
        // document.querySelector("message").innerHTML = "Try again!";
         //let error =document.getElementById(error).innerHTML=`
                 //<span>${info.message}+<br></span>`;
         
         console.log(info);
         //viewBooks(button,counter)
-    }else if(info.status !== 'success' && counter == 5){
+    }else if((info.status !== 'success') && (counter == 5)){
         console.log(info);
-            window.alert("failed to get book query, 5/5 tries. Try again!");
+        console.log("failed to get book query, 5/5 tries. Try again!");
             document.querySelector("message").innerHTML = "Try again!";
             let error =document.getElementById(error).innerHTML=`
                 <span>${info.message}+<br></span>`
@@ -126,7 +133,10 @@ async function viewBooks(button,counter){
             //button1.className = 'btn'
             book.className = 'bookQuerry';
             book.innerText = info.data[i].title + "    " + info.data[i].author + "    " + info.data[i].updated  ;
-            document.querySelector('.bookList').appendChild(book) 
+            document.querySelector('.bookList').appendChild(book)
+            success()
+            function success(){
+                document.getElementById("message").innerHTML = "This is your last added book: "+ info.data[i].title;} 
             console.log(info);
            // searchBook(searchbutton,0)
 
