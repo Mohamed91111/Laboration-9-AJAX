@@ -31,7 +31,9 @@ window.addEventListener('load', () => {
             e.preventDefault();
             console.log('Clicked on addbutton');
          if(key == ""){ 
-            window.alert("GET A KEY FIRST")
+            nokey();
+            function nokey(){
+                document.getElementById("message").innerHTML = "First get a key" ;}
         }
         addBook(addbutton,0);
         console.log('book added');
@@ -39,7 +41,9 @@ window.addEventListener('load', () => {
     let view = document.querySelector('#view');
     view.addEventListener('click', event => {
         if(key == ""){ 
-            window.alert("GET A KEY FIRST")
+            nokey();
+          function nokey(){
+        document.getElementById("message").innerHTML = "First get a key" ;}
         };
         //view.disabled = 'disabled';
         
