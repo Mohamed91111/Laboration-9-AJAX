@@ -124,9 +124,9 @@ async function viewBooks(button,counter){
     }else if((info.status == 'error') && (counter >= 5)){
         console.log(info.message);
         console.log("failed to get book query, 5/5 tries. Try again!");
-            document.querySelector("message").innerHTML = "Try again!";
-            let error =document.getElementById(error).innerHTML=`
-                <span>${info.message}+<br></span>`
+            document.querySelector("message").innerHTML="Try again!";
+            /*let error =document.getElementById(error).innerHTML=`
+                <span>${info.message}+<br></span>`*/
             
             
     }else{
