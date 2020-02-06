@@ -76,12 +76,13 @@ async function addBook(button,counter){
     if((info.status !== 'success') && (counter < 5)){  
         //let error=document.getElementById(error).innerHTML=`
           //      <span>${info.message}+<br></span>`;
-          fail();
+          addBook(button, counter);
+          /*fail();
           function fail(){
         document.getElementById("message").innerHTML = "Failed to add your book. Click (Add New Book) button again -"+counter+" try!"}
         console.log('failed trying again' + counter); 
         console.log(info.message);
-        console.log(info.status);
+        console.log(info.status);*/
         
     }else if((info.status == 'error') && (counter >= 5)){ 
         //let error=document.getElementById(error).innerHTML=`
@@ -109,18 +110,18 @@ async function viewBooks(button,counter){
     counter++
     let req = await window.fetch(apiUrl + 'op=select' +'&key='+ key)
     let info = await req.json();
-    if((info.status !== 'success') && (counter < 5)){ 
+    if((info.status == 'error') && (counter < 5)){ 
         console.log('failed, trying again' + counter)
-        fail();
+        /*fail();
           function fail(){
         document.getElementById("message").innerHTML = "Can't show the book. Click (View) button again - "+counter+" try!" ;}
-       // document.querySelector("message").innerHTML = "Try again!";
+       // document.querySelector("message").innerHTML = "Try again!";*/
         //let error =document.getElementById(error).innerHTML=`
                 //<span>${info.message}+<br></span>`;
-        
+                viewBooks(button,counter)
         console.log(info.message);
         //viewBooks(button,counter)
-    }else if((info.status !== 'success') && (counter == 5)){
+    }else if((info.status == 'error') && (counter >= 5)){
         console.log(info.message);
         console.log("failed to get book query, 5/5 tries. Try again!");
             document.querySelector("message").innerHTML = "Try again!";
@@ -144,7 +145,7 @@ async function viewBooks(button,counter){
             success()
             function success(){
             document.getElementById("message").innerHTML = "This is your last added book: "+ info.data[i].title;} 
-            console.log(info.message);
+            console.log(info);
            // searchBook(searchbutton,0)
 
         }
